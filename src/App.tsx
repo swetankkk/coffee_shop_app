@@ -1,15 +1,8 @@
-import { Link } from 'react-router-dom';
 import './App.css';
+import Home from '@/pages/Home.tsx';
 
 function App() {
-	return (
-		<div className='flex flex-col justify-center items-center h-screen'>
-			app
-			<hr></hr>
-			<Link to='/home'>Home</Link>
-			<Link to='/cafe'>Cafe</Link>
-		</div>
-	);
+	return <Home />;
 }
 
 export default App;

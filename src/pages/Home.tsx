@@ -2,13 +2,21 @@ import profile from '@/assets/profile.svg';
 import filter from '@/assets/filter.svg';
 import Navbar from '@/components/Navbar';
 import Card from '@/components/Card';
-import home_roaster_coffee from '@/assets/home_roaster_coffee.jpeg';
-import haus_coffee from '@/assets/haus_coffee.jpeg';
-import coffee_03 from '@/assets/03.jpeg';
-import coffee_04 from '@/assets/04.jpeg';
 import search from '@/assets/search.svg';
+import { coffeeShopsApi } from '../api';
+import { CoffeeShop } from '../api/coffeeShops';
+import { useState, useEffect } from 'react';
 
 function Home() {
+	const [coffeeShops, setCoffeeShops] = useState<CoffeeShop[]>([]);
+	useEffect(() => {
+		const fetchCoffeeShops = async () => {
+			const response = await coffeeShopsApi.getCoffeeShops();
+
+			setCoffeeShops(response);
+		};
+		fetchCoffeeShops();
+	}, []);
 	return (
 		<div className='flex flex-row justify-center'>
 			<div className='flex relative max-w-md px-4 py-4 space-y-6 h-screen flex-col justify-start  text-[#003b40] font-semibold '>
@@ -36,35 +44,16 @@ function Home() {
 				</div>
 
 				<div className='grid grid-cols-2 grid-rows-30 gap-4 w-full'>
-					<Card
-						name='Home Coffee Roasters'
-						rating='4.5'
-						reviews='1,200 reviews'
-						distance='3.8 miles'
-						photo={home_roaster_coffee}
-					/>
-					<Card
-						name='Haus Coffe'
-						rating='4.4'
-						reviews='429 reviews'
-						distance='2.5 miles'
-						photo={haus_coffee}
-						className=''
-					/>
-					<Card
-						name='03 name'
-						rating='03 r'
-						reviews='03 reviews'
-						distance='03 miles'
-						photo={coffee_03}
-					/>
-					<Card
-						name='04 name'
-						rating='04 r'
-						reviews='04 reviews'
-						distance='04 miles'
-						photo={coffee_04}
-					/>
+					{coffeeShops.map((coffeeShop) => (
+						<Card
+							name={coffeeShop.name}
+							rating={coffeeShop.rating}
+							reviews={coffeeShop.reviews}
+							distance={coffeeShop.distance}
+							photo={coffeeShop.imageurl}
+							id={coffeeShop._id}
+						/>
+					))}
 				</div>
 
 				<Navbar />

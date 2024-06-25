@@ -1,5 +1,6 @@
 import heart from '@/assets/heart.svg';
 import star from '@/assets/star.svg';
+import { useNavigate } from 'react-router-dom';
 
 function Card({
 	name,
@@ -7,17 +8,23 @@ function Card({
 	reviews,
 	distance,
 	photo,
+	id,
 	className = '',
 }: {
 	name: string;
-	rating: string;
-	reviews: string;
-	distance: string;
-	photo: any;
+	rating: number;
+	reviews: number;
+	distance: number;
+	photo: string;
 	className?: string;
+	id: string;
 }) {
+	const navigate = useNavigate();
 	return (
-		<div className={`flex relative flex-col w-40 ${className}`}>
+		<div
+			onClick={() => navigate(`/cafe/${id}`)}
+			className={`flex relative flex-col w-40 ${className}`}
+		>
 			<div className='absolute bg-[#EDF0EF] p-1 rounded-full size-6 -right-2 -top-2'>
 				<img src={heart} alt='heart' className='' />
 			</div>
@@ -30,12 +37,12 @@ function Card({
 			<div className='flex  '>
 				<div className='flex text-[14px]'>
 					<img src={star} alt='star' />
-					{rating}
+					{rating} &nbsp;
 				</div>
 
-				<div className='text-[#B7C1C2] text-[14px]'>{reviews}</div>
+				<div className='text-[#B7C1C2] text-[14px]'>{reviews} reviews</div>
 			</div>
-			<div className='text-[14px]'> {distance}</div>
+			<div className='text-[14px]'> {distance} mile</div>
 		</div>
 	);
 }
