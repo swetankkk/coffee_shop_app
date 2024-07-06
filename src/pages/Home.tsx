@@ -44,7 +44,7 @@ function Home() {
 				</div>
 
 				<div className='grid grid-cols-2 grid-rows-30 gap-4 w-full'>
-					{coffeeShops.map((coffeeShop) => (
+					{coffeeShops.map((coffeeShop, i) => (
 						<Card
 							name={coffeeShop.name}
 							rating={coffeeShop.rating}
@@ -52,6 +52,7 @@ function Home() {
 							distance={coffeeShop.distance}
 							photo={coffeeShop.imageurl}
 							id={coffeeShop._id}
+							key={i}
 						/>
 					))}
 				</div>

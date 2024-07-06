@@ -23,7 +23,6 @@ export interface Product {
 
 export const getCoffeeShops = async (): Promise<CoffeeShop[]> => {
 	const response = await axios.get(`${API_URL}/coffee-shops`);
-	console.log(response.data.data);
 	return response.data.data;
 };
 
